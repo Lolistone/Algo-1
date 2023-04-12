@@ -1,2 +1,3 @@
 # AyED-1
-Voy a estar subiendo lo que haga en AyED 1 de la FCEyN
+En esta repo van a estar las guias de la materia AyED.
+Voy a Trabajar con Haskell y Python.
