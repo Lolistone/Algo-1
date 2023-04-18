@@ -7,7 +7,7 @@ fib n | n == 0 = 0
 
 -- Ejercicio 2 --
 
-parteEntera :: Floar -> Integer
+parteEntera :: Float -> Integer
 parteEntera x | 0 <= x && x < 1 = 0
               | -1 < x && x < 0 = -1
               | x >= 1 = 1 + parteEntera (x-1)
@@ -61,7 +61,7 @@ esCapicua :: Integer -> Bool
 esCapicua n | n < 10 = True
             | n > 10 && (primerDigito == ultimoDigito) = esCapicua (sinExtremos n)
             | otherwise = False
-            where primerDigito = iesimoDigito (n 1)
+            where primerDigito = iesimoDigito n 1
                   ultimoDigito = mod n 10
                   sinExtremos n = div (n - primerDigito*(10^((cantDigitos n)- 1))) 10 
                   
