@@ -64,4 +64,5 @@ esCapicua n | n < 10 = True
             where primerDigito = iesimoDigito n 1
                   ultimoDigito = mod n 10
                   sinExtremos n = div (n - primerDigito*(10^((cantDigitos n)- 1))) 10 
-                  
+
+-- Ejercicio 10 --
