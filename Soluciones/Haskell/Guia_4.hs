@@ -72,21 +72,15 @@ f1 n | n == 0 = 1
      | otherwise = (2^n) + f1 (n-1)  
 
 f2 :: Integer -> Float -> Float
-f2 n q | n == 0 = 1
-       | q == 0 = 0
-       | q == 1 = fromIntegral n
+f2 n q | n == 1 = q
        | otherwise = (q ^^ n) + f2 (n-1) q
 
 f3 :: Integer -> Float -> Float
-f3 n q | n == 0 = 1
-       | q == 0 = 0
-       | q == 1 = fromIntegral (2*n)
-       | otherwise = (q ^^ m) + f2 (m-1) q
-       where m = 2*n
+f3 n q | n == 0 = 0
+       | otherwise = (q ^^ (2*n)) + (q ^^ (2*n - 1)) + f3 (n-1) q
 
 f4 :: Integer -> Float -> Float
-f4 n q | q == 0 = 0
-       | otherwise = (f3 n q) - (f2 n q) + (q^^n)
+f4 n q = (f3 n q) - (f2 (n-1) q)
 
 -- Ejercicio 11 --
 
@@ -220,4 +214,3 @@ existeM n m  | n == 2 = True
 sumaPrimos :: Integer -> Integer 
 sumaPrimos n | n == 1 = 2
              | otherwise = nEsimoPrimo n + sumaPrimos (n-1)
-
