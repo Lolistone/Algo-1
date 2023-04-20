@@ -214,3 +214,27 @@ existeM n m  | n == 2 = True
 sumaPrimos :: Integer -> Integer 
 sumaPrimos n | n == 1 = 2
              | otherwise = nEsimoPrimo n + sumaPrimos (n-1)
+
+-- Ejercicio 20 -- 
+
+sumaDivisores :: Integer -> Integer -> Integer
+sumaDivisores n i | i == 1 = 1
+                  | mod n i == 0 = i + sumaDivisores n (i-1)
+                  | otherwise = sumaDivisores n (i-1)
+
+tomaValorMax :: Integer -> Integer -> Integer
+tomaValorMax x y | x == y = x
+                 | sumaDivisores y y > sumaDivisores x x = tomaValorMax (x+1) y
+                 | otherwise = tomaValorMax x (y-1)
+
+-- Ejercicio 21 --
+
+pitagorasAux :: Integer -> Integer -> Integer -> Integer
+pitagorasAux m n r | n == 0 && m <= r = 1
+                   | n == 0 = 0
+                   | (m^2) + (n^2) <= (r^2) = 1 + pitagorasAux m (n-1) r
+                   | otherwise = pitagorasAux m (n-1) r
+ 
+pitagoras :: Integer -> Integer -> Integer -> Integer
+pitagoras m n r | m == 0 = pitagorasAux 0 n r
+                | otherwise = pitagorasAux m n r + pitagoras (m-1) n r
