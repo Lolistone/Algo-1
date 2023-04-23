@@ -86,7 +86,11 @@ f4 n q = (f3 n q) - (f2 (n-1) q)
 
 eAprox :: Integer -> Float
 eAprox n | n == 0 = 1
-         | otherwise = (1 / fromInteger n) * eAprox (n-1)
+         | otherwise = (1 / fromInteger (factorial n)) + eAprox (n-1)
+
+factorial :: Integer -> Integer
+factorial 0 = 1
+factorial n = n * factorial (n-1)
 
 e :: Float
 e = eAprox 10
