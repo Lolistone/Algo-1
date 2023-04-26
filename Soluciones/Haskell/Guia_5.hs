@@ -169,19 +169,63 @@ generarNblancos n = [' '] ++ generarNblancos (n-1)
 
 -- Ejercicio 5 --
 
+nat2bin :: Integer -> [Integer]
+nat2bin 0 = [0]
+nat2bin 1 = [1]
+nat2bin n = (nat2bin (div n 2)) ++ [mod n 2]
 
+bin2nat :: [Integer] -> Integer
+bin2nat [0] = 0
+bin2nat [1] = 1
+bin2nat (x:xs) = x * (2 ^ (longitud (x:xs) - 1)) + bin2nat xs
+
+nat2hex :: Integer -> [Char]
+nat2hex n | n < 10 = show n
+          | n == 10 = ['A']
+          | n == 11 = ['B']
+          | n == 12 = ['C']
+          | n == 13 = ['D']
+          | n == 14 = ['E']
+          | n == 15 = ['F']
+          | otherwise = nat2hex (div n 16) ++ nat2hex (mod n 16)
+
+sumaAcumulada :: (Num t) => [t] -> [t]
+sumaAcumulada [x] = [x]
+sumaAcumulada (x:xs) = x: sumaAcumulada ((x + head xs): tail xs)
+
+descomponerEnPrimos :: [Integer] -> [[Integer]]
+descomponerEnPrimos [x] = [primosAux x 2]
+descomponerEnPrimos (x:xs) = (primosAux x 2): descomponerEnPrimos xs
+
+-- Funcion auxiliar para descomponerEnPrimos
+
+primosAux :: Integer -> Integer -> [Integer]
+primosAux 1 _ = []
+primosAux 2 _ = [2]
+primosAux n i | mod n i == 0 = i: primosAux (div n i) i
+              | otherwise = primosAux n (i+1) 
 
 -- Ejercicio 6 --
 
 type Set a = [a]
 
+-- En todas las funciones asumo que estoy ingresando conjuntos validos, es decir sin repetidos --
+
+agregarATodos :: Integer -> Set (Set Integer) -> Set (Set Integer)
+agregarATodos n [] = []
+agregarATodos n (x:xs) = (n: x): agregarATodos n xs
+
 partes :: Integer -> Set (Set Integer)
 partes 0 = partesAux []
 partes n = partesAux [1..n]
 
--- El enunciado pide que ingrese un Integer, por eso escribo partesAux -- 
+-- Defino una funcion auxiliar para partes -- 
 
+-- Usando agregarTodos (Que es como se espera que se haga) --
 
+partesAg :: Set Integer -> Set (Set Integer)
+partesAg [] = [[]]
+partesAg (x:xs) = agregarATodos x (partesAux xs) ++ partesAux xs
 
 -- Usando map --
 
@@ -195,3 +239,14 @@ partesComp :: Set Integer -> Set (Set Integer)
 partesComp [] = [[]]
 partesComp (x:xs) = [x:e | e <- partesAux xs] ++ partesAux xs
 
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+
+productoCartesiano :: Set Integer -> Set Integer -> Set (Integer, Integer)
+productoCartesiano [] _ = []
+productoCartesiano _ [] = []
+productoCartesiano (x:xs) (y:ys) = cartesianoAuxiliar (x:xs) y ++ productoCartesiano (x:xs) ys
+
+cartesianoAuxiliar :: Set Integer -> Integer -> Set (Integer, Integer)
+cartesianoAuxiliar [] _ = []
+cartesianoAuxiliar [1] n = [(1,n)]
+cartesianoAuxiliar (x:xs) n = (x,n): cartesianoAuxiliar xs n
