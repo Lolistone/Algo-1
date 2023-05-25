@@ -156,4 +156,96 @@ def esVocal (letra: str) -> bool:
     return res
 
 # Ejercicio 2.1
+def paresPorCeros (l: list[int]) -> list[int]:
+    for i in range (0, len(l), 2):
+        l[i] = 0
+    return l
 
+# Ejercicio 2.2
+def paresPorCeros2 (l: list[int]) -> list[int]:
+    res: list[int] = l
+    for i in range (0, len(l), 2):
+        res[i] = 0
+    return res             
+
+# Ejercicio 2.3
+def sinVocales (palabra: str) -> str:
+    res: str = ""
+    for letra in palabra:
+        if pertenece ("AEIOUaeiou", letra):
+            res += ""
+        else:
+            res += letra
+    return res
+
+# Ejercicio 2.4
+def reemplazaVocales (palabra: str) -> str:
+    res: str = ""
+    for letra in palabra:
+        if pertenece ("aeiou", letra):
+            res += "-"
+        else:
+            res += letra
+    return res
+
+# Ejercicio 2.5
+def daVueltaStr (palabra: str) -> str:
+    res: str = ""
+    for i in range (len(palabra)-1, -1, -1):
+        res += palabra[i]
+    return res
+
+# Ejercicio 3.1
+def nombreEstudiantes() -> list[str]:
+    res: list[str] = []
+    nombre: str = input("Ingrese un nombre o listo: \n") 
+    while (nombre != "listo"):
+        res += [nombre]
+        nombre = input("Ingrese un nombre o listo: \n")
+    return res
+
+# Ejercicio 3.2
+def historialSUBE() -> list[tuple]:
+    monedero: int = 0
+    historial: list[tuple] = []
+    operacion: str = input("Que operacion desea realizar? \n'C' para cargar \n'D' para descontar \n'X' para finalizar\n")
+    while (operacion != "X"):
+        monto: int = int(input("Ingrese el monto a ingresar/retirar: \n"))
+        if (operacion == "C"):
+            monedero += monto
+            historial += [("C", monto)]
+        elif (monto > monedero):
+            print ("No posee saldo suficiente\n")
+        else:
+            monedero -= monto
+            historial += [("D", monto)]
+        operacion: str = input("Que operacion desea realizar? \n'C' para cargar \n'D' para descontar \n'X' para finalizar\n")
+    return historial
+
+import random 
+
+# Ejercicio 3.3
+def sieteMedio() -> list[int]:
+    jugada: str = "carta"
+    cartas: int = []
+    while (jugada != "pararse"):
+        carta: int = random.choice([1,2,3,4,5,6,7,10,11,12])
+        cartas += [carta]
+        print("Su carta es", carta)
+        if (sumaCartas(cartas) <= 7.5):
+            jugada: str = input("Desea una carta o pararse?\n")
+        else:
+            print("Has perdido.\n")
+            jugada = "pararse"
+    if sumaCartas(cartas) <= 7.5:
+        print("Has ganado")  
+    return cartas
+
+def sumaCartas(cartas: list[int]) -> float:
+    res: float = 0
+    for carta in cartas:
+        if pertenece([10,11,12],carta):
+            res += 0.5
+        else:
+            res += carta
+    return res
