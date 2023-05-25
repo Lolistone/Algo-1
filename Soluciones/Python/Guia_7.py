@@ -221,3 +221,35 @@ def aristotelesFor (año: int):
     año -= 20
     for i in range (año, 383, -20):
         print("Viajo un año al pasado, estamos en el año", i, "\n")
+
+# Ejercicio 9
+def rt(x: int, g: int) -> int:
+    g = g + 1
+    return x + g
+
+g: int = 0
+def ro(x: int) -> int:
+    global g
+    g = g + 1
+    return x + g
+
+# 1. ¿Cual es el resultado de evaluar tres veces seguidas ro(1)? 
+# ro devuelve 4 al evaluarse tres veces.
+
+# 2. ¿Cual es el resultado de evaluar tres veces seguidas rt(1, 0)?
+# Devuelve 2.
+
+# 3. En cada funcion, realizar la ejecucion simbolica.
+# ro(1) -> g = 0 + 1 -> 1 + 1 | ro(1) -> g = 1 + 1 -> 2 + 1 | ro(1) -> g = 2 + 1 -> 3 + 1 = 4
+# rt(1, 0) -> g = 0 + 1 -> 1 + 1 = 2 | rt(1, 0) -> g = 0 + 1 -> 1 + 1 = 2 | rt(1, 0) -> g = 0 + 1 -> 1 + 1 = 2 
+
+# 4. Dar la especificacion en lenguaje natural para cada funcion, rt y ro
+# problema ro (x: int): int {
+#   requiere {g exista}
+#   asegura {res = x + g and g = g + 1}
+# }
+
+# problema rt (x: int, g:int): int {
+#   requiere {True}  
+#   asegura {res = x + g + 1}
+# }
