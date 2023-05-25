@@ -224,10 +224,14 @@ def historialSUBE() -> list[tuple]:
 
 import random 
 
-# Ejercicio 3.3
+# Ejercicio 3.3 .
+# Como el enunciado no esclarecia cantidad de jugadores ni las reglas para ganar considere que:
+# - Si el jugador suma menos de 7.5 y se para gana. 
+# - Si se pasa de 7.5 pierde. 
+
 def sieteMedio() -> list[int]:
     jugada: str = "carta"
-    cartas: int = []
+    cartas: list[int] = []
     while (jugada != "pararse"):
         carta: int = random.choice([1,2,3,4,5,6,7,10,11,12])
         cartas += [carta]
@@ -235,10 +239,10 @@ def sieteMedio() -> list[int]:
         if (sumaCartas(cartas) <= 7.5):
             jugada: str = input("Desea una carta o pararse?\n")
         else:
-            print("Has perdido.\n")
             jugada = "pararse"
+            print("Has perdido!")
     if sumaCartas(cartas) <= 7.5:
-        print("Has ganado")  
+        print("Has ganado!")
     return cartas
 
 def sumaCartas(cartas: list[int]) -> float:
@@ -249,3 +253,7 @@ def sumaCartas(cartas: list[int]) -> float:
         else:
             res += carta
     return res
+
+
+# Ejercicio 4
+
