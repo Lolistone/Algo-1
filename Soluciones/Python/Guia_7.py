@@ -183,3 +183,41 @@ def vacaciones (sexo: str, edad: int):
 # Las epecificaciones estan en papel.
 
 # Ejercicio 6
+
+# Ejercicio 6.2
+def pares ():
+    i: int = 40
+    while (i >= 10):
+        if (i % 2) == 0:
+            print(i)
+        i -= 1
+
+# Ejercicio 6.4
+def despegue (n: int):
+    while (n >= 1):
+        print(n)
+        n -= 1
+
+# Ejercicio 6.5
+def viajeEnElTiempo (partida: int, llegada: int):
+    while (partida >= llegada):
+        partida -= 1
+        print("Viajo un año al pasado, estamos en el año", partida, "\n")
+
+# Ejercicio 6.6
+def aristoteles (año: int):
+    while (año - 20) >= 384:
+        año -= 20
+        print("Viajo 20 años al pasado, estamos en el año", año, "\n")
+ 
+# Ejercicio 7 (El 6 con for y saltos).
+def viajeEnElTiempoFor (partida: int, llegada: int):
+    partida -= 1
+    llegada += 1
+    for i in range (partida, llegada, -1):
+        print("Viajo un año al pasado, estamos en el año", i, "\n")
+    
+def aristotelesFor (año: int):
+    año -= 20
+    for i in range (año, 383, -20):
+        print("Viajo un año al pasado, estamos en el año", i, "\n")
