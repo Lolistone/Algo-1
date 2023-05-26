@@ -257,3 +257,50 @@ def sumaCartas(cartas: list[int]) -> float:
 
 # Ejercicio 4
 
+# Ejercicio 4.1
+def perteneceACadaUno (l: list[list[int]], e: int) -> list[bool]:
+    res: list[bool] = []
+    for lista in l:
+        res += [pertenece(lista, e)]
+    return res
+
+# Ejercicio 4.2
+def esMatriz (matriz: list[list[int]]) -> bool:
+    cantidadFilas: int = len(matriz)
+    tamañoFila: int = len(matriz[0])
+    res: bool = (cantidadFilas > 0) and (tamañoFila > 0)
+    for fila in matriz:
+            res = (len(fila) == tamañoFila) and res
+    return res
+
+# Ejercicio 4.3
+def filaOrdenadas (l: list[list[int]]) -> list[bool]:
+    res: list[bool] = []
+    for lista in l:
+        res += [ordenadosFor(lista)]
+    return res
+
+# Ejercicio 4.4
+
+# Requiere que #columnasA = #FilasB
+# Mi implementaciomn utiliza randint pues trabajo con matrices en ZxZ. (Podria ampliarlo)
+
+import numpy as np
+
+def multiplicarMatrices(A: list[list[int]], B: list[list[int]]) -> list[list[int]]:
+    filas: int = len(A)
+    columnas: int = len(B[0])
+    res: list[list[int]] = np.zeros((filas, columnas), dtype=int) # Genero la matriz nula de #FilasA*#ColumnasB
+    for i in range (0, filas):
+        for j in range (0, columnas):
+            for n in range (0, len(B)): 
+                res[i][j] = res[i][j] + A[i][n]*B[n][j]
+    return res
+
+def elevarMatriz(d: int, p: int) -> list[list[int]]:
+    res: list[list[int]] = np.random.randint(-40, 40 + 1, (d, d)) # Genera una matriz (dxd) aleatoria con numeros entre -40 y 40.
+    producto: list[list[int]] = res.copy()
+    while (p > 1):
+        res = multiplicarMatrices(res, producto)
+        p -= 1
+    return res
