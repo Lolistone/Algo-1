@@ -224,10 +224,14 @@ def historialSUBE() -> list[tuple]:
 
 import random 
 
-# Ejercicio 3.3
+# Ejercicio 3.3 .
+# Como el enunciado no esclarecia cantidad de jugadores ni las reglas para ganar considere que:
+# - Si el jugador suma menos de 7.5 y se para gana. 
+# - Si se pasa de 7.5 pierde. 
+
 def sieteMedio() -> list[int]:
     jugada: str = "carta"
-    cartas: int = []
+    cartas: list[int] = []
     while (jugada != "pararse"):
         carta: int = random.choice([1,2,3,4,5,6,7,10,11,12])
         cartas += [carta]
@@ -235,10 +239,10 @@ def sieteMedio() -> list[int]:
         if (sumaCartas(cartas) <= 7.5):
             jugada: str = input("Desea una carta o pararse?\n")
         else:
-            print("Has perdido.\n")
             jugada = "pararse"
+            print("Has perdido!")
     if sumaCartas(cartas) <= 7.5:
-        print("Has ganado")  
+        print("Has ganado!")
     return cartas
 
 def sumaCartas(cartas: list[int]) -> float:
@@ -248,4 +252,55 @@ def sumaCartas(cartas: list[int]) -> float:
             res += 0.5
         else:
             res += carta
+    return res
+
+
+# Ejercicio 4
+
+# Ejercicio 4.1
+def perteneceACadaUno (l: list[list[int]], e: int) -> list[bool]:
+    res: list[bool] = []
+    for lista in l:
+        res += [pertenece(lista, e)]
+    return res
+
+# Ejercicio 4.2
+def esMatriz (matriz: list[list[int]]) -> bool:
+    cantidadFilas: int = len(matriz)
+    tamañoFila: int = len(matriz[0])
+    res: bool = (cantidadFilas > 0) and (tamañoFila > 0)
+    for fila in matriz:
+            res = (len(fila) == tamañoFila) and res
+    return res
+
+# Ejercicio 4.3
+def filaOrdenadas (l: list[list[int]]) -> list[bool]:
+    res: list[bool] = []
+    for lista in l:
+        res += [ordenadosFor(lista)]
+    return res
+
+# Ejercicio 4.4
+
+# Requiere que #columnasA = #FilasB
+# Mi implementaciomn utiliza randint pues trabajo con matrices en ZxZ. (Podria ampliarlo)
+
+import numpy as np
+
+def multiplicarMatrices(A: list[list[int]], B: list[list[int]]) -> list[list[int]]:
+    filas: int = len(A)
+    columnas: int = len(B[0])
+    res: list[list[int]] = np.zeros((filas, columnas), dtype=int) # Genero la matriz nula de #FilasA*#ColumnasB
+    for i in range (0, filas):
+        for j in range (0, columnas):
+            for n in range (0, len(B)): 
+                res[i][j] = res[i][j] + A[i][n]*B[n][j]
+    return res
+
+def elevarMatriz(d: int, p: int) -> list[list[int]]:
+    res: list[list[int]] = np.random.randint(-40, 40 + 1, (d, d)) # Genera una matriz (dxd) aleatoria con numeros entre -40 y 40.
+    producto: list[list[int]] = res.copy()
+    while (p > 1):
+        res = multiplicarMatrices(res, producto)
+        p -= 1
     return res
