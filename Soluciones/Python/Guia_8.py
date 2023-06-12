@@ -287,18 +287,26 @@ def filaOrdenadas (l: list[list[int]]) -> list[bool]:
 
 import numpy as np
 
-def multiplicarMatrices(A: list[list[int]], B: list[list[int]]) -> list[list[int]]:
-    filas: int = len(A)
-    columnas: int = len(B[0])
-    res: list[list[int]] = np.zeros((filas, columnas), dtype=int) # Genero la matriz nula de #FilasA*#ColumnasB
-    for i in range (0, filas):
-        for j in range (0, columnas):
-            for n in range (0, len(B)): 
-                res[i][j] = res[i][j] + A[i][n]*B[n][j]
+def multiplicarMatrices (A: list[list[int]], B: list[list[int]]) -> list[list[int]]:
+    cantFilas: int = len(A)
+    cantColumnas: int = len(B[0])
+    res: list[list[int]] = generarMatriz(cantFilas, cantColumnas)
+    for i in range (0, cantFilas):
+        for j in range (0, cantColumnas):
+            for n in range (0, len(B)):
+                res[i][j] += A[i][n]*B[n][j]
+    return res
+
+def generarMatriz(n: int, m: int) -> list[list[int]]:
+    res: list[list[int]] = []
+    for i in range (0, n):
+        res += [[]]
+        for j in range (0, m):
+            res[i] += [0]
     return res
 
 def elevarMatriz(d: int, p: int) -> list[list[int]]:
-    res: list[list[int]] = np.random.randint(-40, 40 + 1, (d, d)) # Genera una matriz (dxd) aleatoria con numeros entre -40 y 40.
+    res: list[list[int]] = np.random.randint(0, 20 + 1, (d, d)) # Genera una matriz (dxd) aleatoria con numeros entre -40 y 40.
     producto: list[list[int]] = res.copy()
     while (p > 1):
         res = multiplicarMatrices(res, producto)
