@@ -267,9 +267,10 @@ def perteneceACadaUno (l: list[list[int]], e: int) -> list[bool]:
 # Ejercicio 4.2
 def esMatriz (matriz: list[list[int]]) -> bool:
     cantidadFilas: int = len(matriz)
-    tamañoFila: int = len(matriz[0])
-    res: bool = (cantidadFilas > 0) and (tamañoFila > 0)
-    for fila in matriz:
+    if (cantidadFilas > 0):
+        tamañoFila: int = len(matriz[0])
+        res: bool = (tamañoFila > 0)
+        for fila in matriz:
             res = (len(fila) == tamañoFila) and res
     return res
 
