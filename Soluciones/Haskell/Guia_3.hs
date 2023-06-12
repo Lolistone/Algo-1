@@ -20,7 +20,7 @@ k n = g (f (n))
 
 absoluto :: Int -> Int
 absoluto n | n >= 0 = n
-           | otherwise = (-1)*n
+           | otherwise = -n
 
 maximoAbsoluto :: Int -> Int -> Int
 maximoAbsoluto x y | absoluto x > absoluto y = absoluto x
