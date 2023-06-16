@@ -1,3 +1,3 @@
-# AyED-1
-En esta repo van a estar las guias de la materia AyED 1 (Ahora Intro. a la Programación).
+# Algo 1
+En esta repo van a estar las guias de Algo 1 - IP.
 Voy a Trabajar con Haskell y Python.
